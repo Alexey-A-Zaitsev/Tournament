@@ -5,7 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GameTest {
     Game game = new Game();
@@ -26,22 +28,34 @@ public class GameTest {
 
     @Test
     void shouldRegisterFewPlayers() {
+        Map<String, Player> expected = new HashMap<>();
+        expected.put("Sveta", sveta);
+        expected.put("Vasya", vasya);
+        expected.put("Petya", petya);
+        expected.put("Olya", olya);
+        expected.put("Vitalya", vitalya);
+
+
         game.register(vitalya);
         game.register(olya);
-        List actual = game.players;
-        List expected = Arrays.asList(sveta, vasya, petya, vitalya, olya);
+        HashMap actual = game.getPlayers();
 
-        Assertions.assertArrayEquals(actual.toArray(), expected.toArray());
+        Assertions.assertTrue(actual.equals(expected));
     }
 
     @Test
     void shouldRegisterOnePlayer() {
+        Map<String, Player> expected = new HashMap<>();
+        expected.put("Sveta", sveta);
+        expected.put("Vasya", vasya);
+        expected.put("Petya", petya);
+        expected.put("Olya", olya);
+
 
         game.register(olya);
-        List actual = game.players;
-        List expected = Arrays.asList(sveta, vasya, petya, olya);
+        HashMap actual = game.getPlayers();
 
-        Assertions.assertArrayEquals(actual.toArray(), expected.toArray());
+        Assertions.assertTrue(actual.equals(expected));
     }
 
 
